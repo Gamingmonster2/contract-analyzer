@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contract.org.ly | المنصة الوطنية لمعالجة البيانات محلياً وبخصوصية 100%</title>
-    <meta name="description" content="منصة وطنية متكاملة لمعالجة البيانات والعقود محلياً داخل متصفحك بخصوصية وأمان مطلقين 100% دون أي رفع للخوادم.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts: Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -25,6 +25,7 @@
                         'float-medium': 'float 5s ease-in-out infinite',
                         'pulse-subtle': 'pulseSubtle 3s ease-in-out infinite',
                         'spin-slow': 'spin 12s linear infinite',
+                        'shimmer': 'shimmer 2.5s linear infinite',
                     },
                     keyframes: {
                         float: {
@@ -34,6 +35,10 @@
                         pulseSubtle: {
                             '0%, 100%': { opacity: '1', transform: 'scale(1)' },
                             '50%': { opacity: '0.85', transform: 'scale(0.98)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
                         }
                     }
                 }
@@ -42,382 +47,380 @@
     </script>
 
     <style>
-        /* CSS Variables for Dynamic Themes */
+        /* Dynamic Theme Variables */
         :root {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --accent: #2563eb;
-            --accent-light: rgba(37, 99, 235, 0.1);
-            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            --border-color: #e2e8f0;
-            --card-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.1);
-            --pearl-glow: radial-gradient(circle at 50% 50%, rgba(219, 234, 254, 0.6) 0%, rgba(255, 255, 255, 0) 70%);
+            --primary: #1e40af; /* Royal Blue */
+            --primary-hover: #1d4ed8;
+            --primary-glow: rgba(59, 130, 246, 0.2);
+            --accent: #3b82f6;
+            --text-main: #0f172a;
+            --theme-bg: radial-gradient(circle at 50% 50%, #f8fafc 0%, #e2e8f0 100%);
+            --card-border: rgba(226, 232, 240, 0.8);
         }
 
-        [data-theme="black"] {
-            --bg-primary: #09090b;
-            --bg-secondary: #18181b;
-            --text-primary: #fafafa;
-            --text-secondary: #a1a1aa;
-            --accent: #f4f4f5;
-            --accent-light: rgba(244, 244, 245, 0.1);
-            --accent-gradient: linear-gradient(135deg, #27272a 0%, #09090b 100%);
-            --border-color: #27272a;
-            --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
-            --pearl-glow: radial-gradient(circle at 50% 50%, rgba(39, 39, 42, 0.4) 0%, rgba(9, 9, 9, 0) 70%);
+        .theme-luxury {
+            --primary: #111827; /* Luxury Black */
+            --primary-hover: #1f2937;
+            --primary-glow: rgba(156, 163, 175, 0.25);
+            --accent: #4b5563;
+            --text-main: #030712;
+            --theme-bg: radial-gradient(circle at 50% 50%, #ffffff 0%, #d1d5db 100%);
+            --card-border: rgba(209, 213, 219, 0.8);
         }
 
-        [data-theme="gold"] {
-            --bg-primary: #fcfaf2;
-            --bg-secondary: #ffffff;
-            --text-primary: #3c2f2f;
-            --text-secondary: #7c6e64;
-            --accent: #b8860b;
-            --accent-light: rgba(184, 134, 11, 0.1);
-            --accent-gradient: linear-gradient(135deg, #d4af37 0%, #85581a 100%);
-            --border-color: #f3ede0;
-            --card-shadow: 0 10px 30px -10px rgba(184, 134, 11, 0.1);
-            --pearl-glow: radial-gradient(circle at 50% 50%, rgba(250, 243, 224, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+        .theme-gold {
+            --primary: #854d0e; /* Elegant Gold */
+            --primary-hover: #a16207;
+            --primary-glow: rgba(234, 179, 8, 0.2);
+            --accent: #ca8a04;
+            --text-main: #1c1917;
+            --theme-bg: radial-gradient(circle at 50% 50%, #fafaf9 0%, #e7e5e4 100%);
+            --card-border: rgba(231, 229, 228, 0.8);
         }
 
-        [data-theme="olive"] {
-            --bg-primary: #f4f7f5;
-            --bg-secondary: #ffffff;
-            --text-primary: #1c2e24;
-            --text-secondary: #536b5c;
-            --accent: #3b6043;
-            --accent-light: rgba(59, 96, 67, 0.1);
-            --accent-gradient: linear-gradient(135deg, #52825d 0%, #223c28 100%);
-            --border-color: #e2eae4;
-            --card-shadow: 0 10px 30px -10px rgba(59, 96, 67, 0.1);
-            --pearl-glow: radial-gradient(circle at 50% 50%, rgba(220, 235, 224, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+        .theme-olive {
+            --primary: #3f6212; /* Sophisticated Olive */
+            --primary-hover: #4d7c0f;
+            --primary-glow: rgba(132, 204, 22, 0.2);
+            --accent: #65a30d;
+            --text-main: #052e16;
+            --theme-bg: radial-gradient(circle at 50% 50%, #f7fee7 0%, #d9f99d 100%);
+            --card-border: rgba(217, 249, 157, 0.8);
         }
 
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            transition: background-color 0.4s ease, color 0.4s ease;
+            font-family: 'Cairo', sans-serif;
+            background: var(--theme-bg);
+            color: var(--text-main);
+            transition: background 0.5s ease, color 0.5s ease;
         }
 
-        /* Apply theme variables to custom utility classes */
-        .theme-bg-secondary { background-color: var(--bg-secondary); }
-        .theme-text-primary { color: var(--text-primary); }
-        .theme-text-secondary { color: var(--text-secondary); }
-        .theme-border { border-color: var(--border-color); }
-        .theme-accent-color { color: var(--accent); }
-        .theme-accent-bg { background-color: var(--accent); }
-        .theme-accent-light-bg { background-color: var(--accent-light); }
-        .theme-gradient { background: var(--accent-gradient); }
-        .theme-shadow { box-shadow: var(--card-shadow); }
-        .theme-pearl-bg { background: var(--pearl-glow); }
+        /* Custom Pearl Glassmorphism */
+        .pearl-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04),
+                        inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .pearl-glass-dark {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Holographic overlay accent */
+        .hologram-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            z-index: 0;
+            background: linear-gradient(45deg, #a78bfa, #34d399, #60a5fa, #fb7185);
+            background-size: 400% 400%;
+            animation: shimmer 15s ease infinite;
+        }
 
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
+            background: rgba(241, 245, 249, 0.5);
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
+            background: var(--primary);
+            border-radius: 9999px;
+            opacity: 0.8;
         }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden">
+<body class="min-h-screen overflow-x-hidden selection:bg-blue-200">
 
-    <!-- Header Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b theme-border bg-opacity-80 theme-bg-secondary">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Ambient Holographic Orbs -->
+    <div class="hologram-glow w-[500px] h-[500px] top-[-10%] right-[-10%]"></div>
+    <div class="hologram-glow w-[600px] h-[600px] bottom-[10%] left-[-15%]"></div>
+    <div class="hologram-glow w-[400px] h-[400px] top-[40%] right-[20%]"></div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 w-full transition-all duration-300 pearl-glass border-b border-opacity-40">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             
             <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 focus:outline-none" aria-label="الصفحة الرئيسية لـ Contract.org.ly">
-                <div class="w-10 h-10 rounded-xl theme-gradient flex items-center justify-center text-white font-black text-xl shadow-lg">
-                    C
+            <a href="#" class="flex items-center gap-3 group" aria-label="الصفحة الرئيسية لـ Contract.org.ly">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-110" style="background: var(--primary);">
+                    🇱🇾
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-black text-lg tracking-wider">Contract<span class="theme-accent-color">.org.ly</span></span>
-                    <span class="text-[10px] opacity-80 font-medium -mt-1">المنصة الوطنية الآمنة</span>
+                    <span class="text-xl font-extrabold tracking-tight" style="color: var(--primary);">Contract<span class="text-gray-400 font-light">.org.ly</span></span>
+                    <span class="text-[10px] text-gray-500 font-medium -mt-1">المنصة الوطنية الآمنة للبيانات</span>
                 </div>
             </a>
 
             <!-- Navigation Links (Desktop) -->
-            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
-                <a href="#about" class="hover:opacity-80 transition-opacity">عن المنصة</a>
-                <a href="#three-rectangles" class="hover:opacity-80 transition-opacity">الأدوات الحالية</a>
-                <a href="#privacy" class="hover:opacity-80 transition-opacity">ميثاق الخصوصية</a>
-                <a href="#matrix" class="hover:opacity-80 transition-opacity">حزمة الأدوات</a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-700">
+                <a href="#three-rectangles" class="hover:text-blue-600 transition-colors">مزايا المنصة</a>
+                <a href="#tools-matrix" class="hover:text-blue-600 transition-colors">مصفوفة الأدوات</a>
+                <a href="#privacy-guarantee" class="hover:text-blue-600 transition-colors">السيادة الرقمية</a>
+                <a href="#cta-section" class="hover:text-blue-600 transition-colors">انضم إلينا</a>
             </nav>
 
-            <!-- Dynamic Theme Engine Selector & Status -->
+            <!-- Dynamic Theme Selector & Action -->
             <div class="flex items-center gap-4">
-                <!-- Theme Pills -->
-                <div class="flex items-center gap-1.5 p-1 rounded-full theme-border border theme-bg-secondary shadow-inner">
-                    <button onclick="setTheme('blue')" class="w-6 h-6 rounded-full bg-blue-600 border-2 border-white focus:outline-none transition-transform hover:scale-110" title="أزرق ملكي" aria-label="مظهر أزرق ملكي"></button>
-                    <button onclick="setTheme('black')" class="w-6 h-6 rounded-full bg-zinc-900 border-2 border-white focus:outline-none transition-transform hover:scale-110" title="أسود فاخر" aria-label="مظهر أسود فاخر"></button>
-                    <button onclick="setTheme('gold')" class="w-6 h-6 rounded-full bg-amber-500 border-2 border-white focus:outline-none transition-transform hover:scale-110" title="ذهبي راقي" aria-label="مظهر ذهبي راقي"></button>
-                    <button onclick="setTheme('olive')" class="w-6 h-6 rounded-full bg-emerald-800 border-2 border-white focus:outline-none transition-transform hover:scale-110" title="زيتوني هادئ" aria-label="مظهر زيتوني هادئ"></button>
+                <!-- Theme Switcher Container -->
+                <div class="pearl-glass p-1.5 rounded-full flex items-center gap-1 border shadow-inner">
+                    <button onclick="switchTheme('royal')" class="w-6 h-6 rounded-full bg-blue-700 border-2 border-white shadow-sm hover:scale-110 transition-transform" title="الأزرق الملكي" aria-label="تفعيل المظهر الأزرق الملكي"></button>
+                    <button onclick="switchTheme('luxury')" class="w-6 h-6 rounded-full bg-gray-900 border-2 border-white shadow-sm hover:scale-110 transition-transform" title="الأسود الفاخر" aria-label="تفعيل المظهر الأسود الفاخر"></button>
+                    <button onclick="switchTheme('gold')" class="w-6 h-6 rounded-full bg-yellow-600 border-2 border-white shadow-sm hover:scale-110 transition-transform" title="الذهبي الراقي" aria-label="تفعيل المظهر الذهبي"></button>
+                    <button onclick="switchTheme('olive')" class="w-6 h-6 rounded-full bg-lime-700 border-2 border-white shadow-sm hover:scale-110 transition-transform" title="الزيتوني الهادئ" aria-label="تفعيل المظهر الزيتوني"></button>
                 </div>
 
-                <!-- Status Badge -->
-                <div class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-green-500/10 text-green-500 border border-green-500/20">
-                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    نشط محلياً 100%
-                </div>
+                <!-- Launch App (CTA) -->
+                <a href="#tools-matrix" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" style="background: var(--primary);" aria-label="ابدأ استخدام الأدوات الآن">
+                    ابدأ المعالجة ⚡
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Wrapper -->
-    <main id="main-content" class="pt-20">
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="relative z-10">
 
-        <!-- Hero Section -->
-        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4">
-            <!-- Iridescent Background Glows -->
-            <div class="absolute inset-0 theme-pearl-bg opacity-70 pointer-events-none"></div>
-            <div class="absolute top-1/4 left-1/4 w-[35rem] h-[35rem] rounded-full theme-accent-light-bg filter blur-[100px] pointer-events-none animate-float-slow"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] rounded-full theme-accent-light-bg filter blur-[120px] pointer-events-none animate-float-medium"></div>
-
-            <!-- Floating Emojis Elements (Lightweight visuals instead of heavy images) -->
-            <div class="absolute top-24 right-10 md:right-32 text-4xl select-none animate-float-slow pointer-events-none">🔒</div>
-            <div class="absolute bottom-24 left-10 md:left-32 text-4xl select-none animate-float-medium pointer-events-none">💻</div>
-            <div class="absolute top-1/2 left-8 md:left-20 text-3xl select-none animate-bounce pointer-events-none" style="animation-duration: 4s;">📊</div>
-            <div class="absolute bottom-1/3 right-8 md:right-20 text-3xl select-none animate-pulse pointer-events-none">⚡</div>
-
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[85vh] flex items-center justify-center py-20 px-6 overflow-hidden">
             <div class="max-w-5xl mx-auto text-center relative z-10">
-                <!-- Platform Badge -->
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold theme-accent-light-bg theme-accent-color mb-8 border theme-border animate-pulse-subtle">
-                    <span>🇱🇾</span> المنصة الوطنية الليبية الموحدة للبيانات
+                
+                <!-- Floating Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full pearl-glass border text-xs font-semibold text-gray-700 mb-8 animate-pulse-subtle">
+                    <span class="flex h-2.5 w-2.5 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    سيادة رقمية وأمان محلي بنسبة 100% داخل ليبيا 🇱🇾
                 </div>
 
-                <!-- Main Title -->
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight sm:leading-none mb-8">
-                    معالجة البيانات محلياً <br>
-                    <span class="text-transparent bg-clip-text theme-gradient">وبخصوصية مطلقـة 100%</span>
+                <!-- Commanding Typography -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.15] mb-8">
+                    معالجة ذكية لبياناتك <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-500" style="background-image: linear-gradient(to left, var(--primary), var(--accent));">
+                        دون مغادرة جهازك مطلقاً
+                    </span>
                 </h1>
 
-                <!-- Subtitle -->
-                <p class="text-lg sm:text-2xl theme-text-secondary max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
-                    المنصة السيادية الأولى لتنظيم، فرز، وتحليل جداول البيانات والعقود الضخمة مباشرةً داخل جهازك. ملفاتك لا ترفع لأي خادم خارجي ولا تمر عبر الإنترنت نهائياً.
+                <!-- Subtitle / Paragraph -->
+                <p class="max-w-3xl mx-auto text-base sm:text-xl text-gray-600 leading-relaxed mb-12">
+                    المنصة الوطنية المتكاملة لفرز وتحليل المستندات وجداول البيانات محلياً. نضمن لك خصوصية مطلقة؛ ملفاتك تُعالج بالكامل داخل متصفحك ولا تمر عبر شبكة الإنترنت أو أي خوادم خارجية.
                 </p>
 
-                <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-                    <a href="#three-rectangles" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-white theme-gradient theme-shadow hover:scale-[1.02] active:scale-95 transition-all text-center flex items-center justify-center gap-3">
-                        <span>ابدأ المعالجة الفورية</span>
-                        <span>🚀</span>
-                    </a>
-                    <a href="#privacy" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold theme-bg-secondary border theme-border hover:bg-opacity-80 transition-all text-center flex items-center justify-center gap-3">
-                        <span>ميثاق الأمان والخصوصية</span>
-                        <span>🛡️</span>
-                    </a>
-                </div>
-
-                <!-- Live Client-Side Sandbox Demo (Interactive Proof of Privacy) -->
-                <div class="mt-16 max-w-2xl mx-auto p-6 rounded-3xl border theme-border theme-bg-secondary theme-shadow text-right">
-                    <div class="flex items-center justify-between mb-4 border-b theme-border pb-3">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                        </div>
-                        <span class="text-xs font-bold theme-text-secondary flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
-                            محلل الخصوصية الفوري (محلي 100%)
-                        </span>
-                    </div>
-                    <label for="demo-input" class="block text-sm font-bold mb-2">اختبر السرعة والأمان بنفسك (أدخل أي نص حساس هنا):</label>
-                    <textarea id="demo-input" oninput="analyzeLocally()" placeholder="اكتب أو الصق نصاً هنا لتجربة المعالجة الفورية داخل متصفحك..." class="w-full h-24 p-4 rounded-xl border theme-border bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-sm leading-relaxed" dir="rtl"></textarea>
-                    
-                    <div class="grid grid-cols-3 gap-4 mt-4 text-center">
-                        <div class="p-3 rounded-xl theme-bg-secondary border theme-border">
-                            <div class="text-xs theme-text-secondary font-bold mb-1">عدد الحروف</div>
-                            <div id="char-count" class="text-lg font-black theme-accent-color">0</div>
-                        </div>
-                        <div class="p-3 rounded-xl theme-bg-secondary border theme-border">
-                            <div class="text-xs theme-text-secondary font-bold mb-1">عدد الكلمات</div>
-                            <div id="word-count" class="text-lg font-black theme-accent-color">0</div>
-                        </div>
-                        <div class="p-3 rounded-xl theme-bg-secondary border theme-border">
-                            <div class="text-xs theme-text-secondary font-bold mb-1">وقت المعالجة</div>
-                            <div id="process-speed" class="text-lg font-black text-green-500">0ms</div>
+                <!-- Dynamic Counter Widget -->
+                <div class="max-w-md mx-auto mb-12 p-6 rounded-2xl pearl-glass border flex flex-col items-center gap-4 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl font-black" style="color: var(--primary);" id="tool-counter-display">2 / 10</span>
+                        <div class="w-32 bg-gray-200 h-3 rounded-full overflow-hidden">
+                            <div class="h-full rounded-full transition-all duration-1000" style="width: 20%; background: var(--primary);"></div>
                         </div>
                     </div>
-                    <div class="text-[10px] theme-text-secondary mt-3 text-center flex items-center justify-center gap-1.5">
-                        <span>🔒</span> تمت المعالجة محلياً بالكامل في متصفحك. لم يتم نقل أي بايت واحد عبر الشبكة.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: The Three Rectangles Strategy (استراتيجية المستطيلات الثلاثة) -->
-        <section id="three-rectangles" class="py-24 px-4 relative theme-bg-secondary border-y theme-border">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl sm:text-5xl font-black mb-6">رؤية متكاملة في ثلاثة محاور رئيسية</h2>
-                    <p class="text-lg theme-text-secondary leading-relaxed">
-                        نطبق منهجية "المستطيلات الثلاثة" الهيكلية لضمان انسيابية العمل، دقة المعالجة، والشفافية الكاملة للمنصة الوطنية.
+                    <p class="text-xs text-gray-500 font-bold">
+                        أداة جديدة تُضاف كل يومين.. ترقبوا الإطلاق الكامل خلال شهر 🚀
                     </p>
                 </div>
 
-                <!-- The 3 Rectangles Grid Layout -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Rectangle 1: App 1 (نظام الفرز وعرض جداول البيانات والعقود) -->
-                    <article class="p-8 sm:p-10 rounded-3xl border theme-border theme-bg-secondary theme-shadow relative overflow-hidden flex flex-col justify-between group hover:border-opacity-80 transition-all duration-300">
-                        <div class="absolute top-0 right-0 w-32 h-32 theme-accent-light-bg rounded-bl-full opacity-30 pointer-events-none"></div>
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl theme-accent-light-bg flex items-center justify-center text-3xl mb-8">📑</div>
-                            <span class="text-xs font-bold theme-accent-color uppercase tracking-wider mb-2 block">الأداة الأولى (App)</span>
-                            <h3 class="text-2xl font-black mb-4">نظام فرز وعرض جداول البيانات والعقود السريع</h3>
-                            <p class="theme-text-secondary leading-relaxed text-sm mb-6">
-                                محرك تفاعلي فائق السرعة لقراءة وتحليل ملفات العقود والجداول (CSV, Excel) محلياً. يتيح لك الفرز المتقدم، التصفية الذكية، وعرض البيانات الضخمة بمرونة تامة وثوانٍ معدودة دون الحاجة للاتصال بالإنترنت.
-                            </p>
-                        </div>
-                        <div>
-                            <div class="border-t theme-border pt-6 mt-6 flex items-center justify-between">
-                                <span class="text-xs font-bold text-green-500 flex items-center gap-1">
-                                    <span class="w-2 h-2 rounded-full bg-green-500"></span> جاهز للاستخدام
-                                </span>
-                                <button onclick="alert('جاري تشغيل واجهة فرز الجداول المحلية...')" class="px-4 py-2 rounded-xl text-xs font-bold text-white theme-gradient">تشغيل الأداة</button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Rectangle 2: App 2 (المحرك البرمجي المتقدم - Local Analyzer) -->
-                    <article class="p-8 sm:p-10 rounded-3xl border theme-border theme-bg-secondary theme-shadow relative overflow-hidden flex flex-col justify-between group hover:border-opacity-80 transition-all duration-300">
-                        <div class="absolute top-0 right-0 w-32 h-32 theme-accent-light-bg rounded-bl-full opacity-30 pointer-events-none"></div>
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl theme-accent-light-bg flex items-center justify-center text-3xl mb-8">⚙️</div>
-                            <span class="text-xs font-bold theme-accent-color uppercase tracking-wider mb-2 block">الأداة الثانية (App 1)</span>
-                            <h3 class="text-2xl font-black mb-4">المحرك البرمجي المتقدم (Local Analyzer Subsystem)</h3>
-                            <p class="theme-text-secondary leading-relaxed text-sm mb-6">
-                                نظام تحليل معزز بقوة لغة بايثون (Python) مجمّع محلياً للعمل داخل متصفحك مباشرة عبر WebAssembly. يسحق الملفات الضخمة سحقاً فورياً، ويستخرج الأنماط الإحصائية، ويرسم المخططات البيانية المعقدة محلياً 100%.
-                            </p>
-                        </div>
-                        <div>
-                            <div class="border-t theme-border pt-6 mt-6 flex items-center justify-between">
-                                <span class="text-xs font-bold text-green-500 flex items-center gap-1">
-                                    <span class="w-2 h-2 rounded-full bg-green-500"></span> جاهز للاستخدام
-                                </span>
-                                <button onclick="alert('جاري تهيئة بيئة Python WebAssembly المحلية...')" class="px-4 py-2 rounded-xl text-xs font-bold text-white theme-gradient">تشغيل الأداة</button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Rectangle 3: Roadmap & Interactive Indicator -->
-                    <article class="p-8 sm:p-10 rounded-3xl border theme-border theme-bg-secondary theme-shadow relative overflow-hidden flex flex-col justify-between group hover:border-opacity-80 transition-all duration-300">
-                        <div class="absolute top-0 right-0 w-32 h-32 theme-accent-light-bg rounded-bl-full opacity-30 pointer-events-none"></div>
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl theme-accent-light-bg flex items-center justify-center text-3xl mb-8">🚀</div>
-                            <span class="text-xs font-bold theme-accent-color uppercase tracking-wider mb-2 block">مؤشر التقدم الديناميكي</span>
-                            <h3 class="text-2xl font-black mb-4">الأدوات المتوفرة: <span class="theme-accent-color">2 من أصل 10</span></h3>
-                            
-                            <!-- Dynamic Progress Bar -->
-                            <div class="w-full bg-gray-200 dark:bg-zinc-800 rounded-full h-3 mb-6 mt-4 overflow-hidden">
-                                <div class="theme-gradient h-3 rounded-full transition-all duration-1000" style="width: 20%"></div>
-                            </div>
-
-                            <p class="theme-text-secondary leading-relaxed text-sm mb-6">
-                                نعمل على بناء المنصة الوطنية المتكاملة خطوة بخطوة. أداة جديدة تُضاف كل يومين لتغطية كافة متطلبات معالجة وتدقيق البيانات الحكومية والخاصة.
-                            </p>
-                        </div>
-                        <div>
-                            <div class="border-t theme-border pt-6 mt-6">
-                                <div class="p-3.5 rounded-2xl bg-amber-500/10 text-amber-600 border border-amber-500/20 text-xs font-bold text-center">
-                                    ⚠️ ترقبوا الإطلاق الكامل لجميع الأدوات خلال شهر!
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
+                <!-- Call to Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#tools-matrix" class="w-full sm:w-auto px-8 py-4 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1" style="background: var(--primary);">
+                        استعرض الأدوات المتوفرة ⚡
+                    </a>
+                    <a href="#three-rectangles" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg pearl-glass border text-gray-800 hover:bg-white/60 transition-all hover:-translate-y-1">
+                        كيف نضمن خصوصيتك؟ 🛡️
+                    </a>
                 </div>
+
+            </div>
+
+            <!-- Floating Asset Array (Visual Elements) -->
+            <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+                <!-- Floating Emojis acting as lightweight assets -->
+                <div class="absolute top-[20%] right-[10%] text-5xl animate-float-slow select-none opacity-40">📄</div>
+                <div class="absolute top-[40%] left-[8%] text-6xl animate-float-medium select-none opacity-30">🐍</div>
+                <div class="absolute bottom-[25%] right-[15%] text-5xl animate-float-medium select-none opacity-40">🔒</div>
+                <div class="absolute bottom-[15%] left-[20%] text-5xl animate-float-slow select-none opacity-30">📊</div>
+                
+                <!-- Graphic Spheres -->
+                <div class="absolute top-[15%] left-[15%] w-32 h-32 rounded-full bg-blue-400/10 blur-xl animate-pulse-subtle"></div>
+                <div class="absolute bottom-[30%] right-[5%] w-48 h-48 rounded-full bg-emerald-400/10 blur-2xl animate-pulse-subtle"></div>
             </div>
         </section>
 
-        <!-- Alternating Feature Rows -->
-        <section id="about" class="py-24 px-4">
+        <!-- THE THREE RECTANGLES SECTION -->
+        <section id="three-rectangles" class="py-24 px-6 relative bg-white/30">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">بنية الأمان الثلاثية للمنصة</h2>
+                    <p class="text-gray-600">نعتمد أرقى المعايير التقنية لنمنحك تجربة استخدام فائقة السرعة مع أمان محلي مطلق عبر ثلاثة ركائز أساسية.</p>
+                </div>
+
+                <!-- The 3 Rectangles Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Rectangle 1: Fast Table and Contract Sorting (App) -->
+                    <div class="pearl-glass rounded-3xl p-8 border hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-3xl mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                                📊
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">نظام فرز وعرض جداول البيانات والعقود السريع</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                                أداة متكاملة تتيح لك رفع ملفات CSV أو Excel وعرضها فوراً في جداول تفاعلية ذكية. يمكنك تصفية، فرز، والبحث داخل عقودك وبياناتك بسرعة فائقة وبمرونة تامة دون إرسال بايت واحد إلى الإنترنت.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs font-bold text-green-600 bg-green-50 px-3 py-1 rounded-full">جاهز للاستخدام ✔️</span>
+                            <a href="https://app.contract.org.ly/" target="_blank" rel="noopener noreferrer" class="text-sm font-bold flex items-center gap-1 hover:underline" style="color: var(--primary);">
+                                تشغيل الأداة الأولى 🚀
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Rectangle 2: Python-Powered Local Analyzer Subsystem (App1) -->
+                    <div class="pearl-glass rounded-3xl p-8 border hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center text-3xl mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                                🐍
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">المحرك البرمجي المتقدم (Local Analyzer)</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                                محرك جبار مدعوم بتقنيات Python المترجمة للعمل محلياً بالكامل عبر متصفحك (WebAssembly). يسحق الملفات الضخمة ويحلل النصوص المعقدة ويستخرج الأنماط الإحصائية في أجزاء من الثانية بخصوصية تامة 100%.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs font-bold text-green-600 bg-green-50 px-3 py-1 rounded-full">جاهز للاستخدام ✔️</span>
+                            <a href="https://app1.contract.org.ly/" target="_blank" rel="noopener noreferrer" class="text-sm font-bold flex items-center gap-1 hover:underline" style="color: var(--primary);">
+                                تشغيل المحرك المتقدم 🐍
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Rectangle 3: Ultimate Privacy & Security Guarantee -->
+                    <div class="pearl-glass rounded-3xl p-8 border hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border-dashed" style="border-color: var(--primary);">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center text-3xl mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                                🔒
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">المعالجة المحلية الآمنة 100% داخل المتصفح</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                                نعلنها بكل ثقة: مستنداتك وسجلاتك لا تُرفع لأي خادم خارجي ولا تمر عبر شبكة الإنترنت أبداً. تتم كافة العمليات الحسابية داخل الذاكرة المؤقتة لمتصفحك الشخصي، مما يعني حماية مطلقة ضد التسريب والاختراق.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">حماية دستورية 🛡️</span>
+                            <span class="text-sm font-bold text-gray-400">سيادة رقمية ليبية</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ALTERNATING DETAILED FEATURE ROWS -->
+        <section class="py-24 px-6 relative overflow-hidden">
             <div class="max-w-7xl mx-auto space-y-32">
                 
-                <!-- Row A: Left Image (Mockup/Visual), Right Text -->
-                <div class="flex flex-col lg:flex-row items-center gap-16">
-                    <!-- Right: Text Content -->
-                    <div class="w-full lg:w-1/2 space-y-6 order-2 lg:order-1">
-                        <div class="w-12 h-12 rounded-xl theme-accent-light-bg flex items-center justify-center text-2xl">🛡️</div>
-                        <h2 class="text-3xl sm:text-4xl font-black leading-tight">بنية أمنية متقدمة لا تعتمد على السيرفرات الخارجية</h2>
-                        <p class="theme-text-secondary leading-relaxed">
-                            تم تصميم بنية Contract.org.ly التحتية لتقوم بمهام المعالجة المعقدة بالكامل داخل جهاز المستخدم. بفضل تقنيات الويب الحديثة، نقوم بتحميل محركات المعالجة إلى ذاكرة متصفحك المؤقتة لمرة واحدة فقط، لتتمكن بعدها من معالجة أطنان البيانات دون الحاجة لإرسال أي ملف خارج جهازك.
+                <!-- Row A: Right Typography, Left Tech Wireframe Mockup -->
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <div class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">
+                            أداء فائق السرعة ⚡
+                        </div>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold leading-tight">فرز ذكي وتصفية لحظية لعقودك وجداول بياناتك</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            تم تصميم نظام الفرز السريع ليتعامل مع آلاف الصفوف من البيانات في رمشة عين. يمكنك استيراد عقود التوظيف، الميزانيات، أو كشوفات الموظفين، وفرزها وتصنيفها بناءً على شروط مخصصة، مع تصدير النتائج فوراً.
                         </p>
-                        <ul class="space-y-3 font-semibold text-sm">
+                        <ul class="space-y-3 text-sm font-semibold text-gray-700">
                             <li class="flex items-center gap-2">
-                                <span class="text-green-500">✔</span> تشفير تام للعمليات على مستوى العتاد المحلي.
+                                <span class="text-green-500">✔</span> دعم كامل لملفات Excel و CSV العربية والإنجليزية.
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="text-green-500">✔</span> متوافق مع معايير الأمن السيبراني الوطنية والدولية.
+                                <span class="text-green-500">✔</span> تصفية ذكية بناءً على الكلمات المفتاحية والأرقام والمواريخ.
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="text-green-500">✔</span> يعمل بكفاءة تامة حتى في حالات انقطاع الإنترنت.
+                                <span class="text-green-500">✔</span> واجهة استخدام مريحة تدعم السحب والإفلات بكل سلاسة.
                             </li>
                         </ul>
                     </div>
-                    <!-- Left: Graphic/Visual Representation -->
-                    <div class="w-full lg:w-1/2 order-1 lg:order-2 flex justify-center">
-                        <div class="relative w-full max-w-md aspect-square rounded-3xl border theme-border theme-bg-secondary theme-shadow flex items-center justify-center p-8 overflow-hidden">
-                            <div class="absolute inset-0 theme-pearl-bg opacity-40"></div>
-                            <!-- Isometric Wireframe Device Outline Simulated with CSS -->
-                            <div class="w-64 h-64 border-2 border-dashed theme-border rounded-full flex items-center justify-center animate-spin-slow">
-                                <div class="w-48 h-48 border-2 border-dashed theme-border rounded-full flex items-center justify-center">
-                                    <div class="w-32 h-32 border-2 border-dashed theme-border rounded-full"></div>
+                    <div class="w-full lg:w-1/2 relative">
+                        <!-- Isometric Tech Wireframe Mockup Container -->
+                        <div class="pearl-glass rounded-3xl p-6 border shadow-2xl relative overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
+                            <div class="flex items-center justify-between pb-4 border-b mb-4">
+                                <div class="flex gap-1.5">
+                                    <span class="w-3 w-3 h-3 rounded-full bg-red-400"></span>
+                                    <span class="w-3 w-3 h-3 rounded-full bg-yellow-400"></span>
+                                    <span class="w-3 w-3 h-3 rounded-full bg-green-400"></span>
+                                </div>
+                                <span class="text-xs text-gray-400 font-mono">local-viewer.sh</span>
+                            </div>
+                            <!-- Mockup Table -->
+                            <div class="space-y-3">
+                                <div class="h-8 bg-gray-100/80 rounded-lg animate-pulse flex items-center justify-between px-4 text-xs font-bold text-gray-500">
+                                    <span>اسم العقد</span><span>الجهة</span><span>تاريخ الإبرام</span><span>الحالة</span>
+                                </div>
+                                <div class="h-10 bg-white rounded-lg border border-gray-100 flex items-center justify-between px-4 text-xs">
+                                    <span class="font-bold">عقد توريد أجهزة مكتبية</span><span>وزارة المالية</span><span>2024-01-15</span><span class="text-green-600 bg-green-50 px-2 py-0.5 rounded">نشط</span>
+                                </div>
+                                <div class="h-10 bg-white rounded-lg border border-gray-100 flex items-center justify-between px-4 text-xs">
+                                    <span class="font-bold">عقد صيانة شبكات الاتصال</span><span>هيئة الاتصالات</span><span>2023-11-02</span><span class="text-green-600 bg-green-50 px-2 py-0.5 rounded">نشط</span>
+                                </div>
+                                <div class="h-10 bg-white rounded-lg border border-gray-100 flex items-center justify-between px-4 text-xs">
+                                    <span class="font-bold">اتفاقية تطوير برمجيات</span><span>الشركة الوطنية</span><span>2024-02-10</span><span class="text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded">قيد المراجعة</span>
                                 </div>
                             </div>
-                            <div class="absolute text-7xl select-none animate-bounce" style="animation-duration: 5s;">💻</div>
-                            <div class="absolute top-10 right-10 text-3xl select-none animate-pulse">🔒</div>
-                            <div class="absolute bottom-10 left-10 text-3xl select-none animate-pulse">📁</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Row B: Left Text, Right Image (Mockup/Visual) -->
-                <div class="flex flex-col lg:flex-row items-center gap-16">
-                    <!-- Left: Graphic/Visual Representation -->
-                    <div class="w-full lg:w-1/2 flex justify-center">
-                        <div class="relative w-full max-w-md aspect-square rounded-3xl border theme-border theme-bg-secondary theme-shadow flex items-center justify-center p-8 overflow-hidden">
-                            <div class="absolute inset-0 theme-pearl-bg opacity-40"></div>
-                            <!-- Clean SVG Chart/Graph Mockup -->
-                            <svg class="w-full h-48" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true">
-                                <defs>
-                                    <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.4"/>
-                                        <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
-                                    </linearGradient>
-                                </defs>
-                                <path d="M0,45 Q15,15 30,35 T60,10 T90,25 L100,20 L100,50 L0,50 Z" fill="url(#chart-grad)" />
-                                <path d="M0,45 Q15,15 30,35 T60,10 T90,25 L100,20" fill="none" stroke="var(--accent)" stroke-width="2" />
-                                <circle cx="30" cy="35" r="2" fill="var(--accent)" />
-                                <circle cx="60" cy="10" r="2" fill="var(--accent)" />
-                                <circle cx="90" cy="25" r="2" fill="var(--accent)" />
-                            </svg>
-                            <div class="absolute top-6 left-6 text-xs font-bold bg-green-500/10 text-green-500 px-2 py-1 rounded-md">تحليل فوري</div>
-                            <div class="absolute bottom-6 right-6 text-2xl select-none animate-float-medium">📈</div>
+                <!-- Row B: Left Typography, Right Python Analyzer Preview -->
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <div class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                            المحرك البرمجي المتقدم 🚀
+                        </div>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold leading-tight">قوة بايثون الكاملة تعمل مباشرة في متصفحك</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            بفضل تقنيات الـ WebAssembly الثورية، نجحنا في جلب محرك التحليل والمطابقة المطور بلغة بايثون ليعمل محلياً بالكامل. يتيح لك هذا المحرك سحق ومعالجة الملفات الضخمة وتوليد تقارير إحصائية متكاملة دون الحاجة لرفعها إلى أي سيرفر.
+                        </p>
+                        <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm text-gray-600 italic">
+                            "أول منصة ليبية تدمج بين قوة الحوسبة السحابية والأمان المحلي المطلق دون تواصل مع شبكة الإنترنت."
                         </div>
                     </div>
-                    <!-- Right: Text Content -->
-                    <div class="w-full lg:w-1/2 space-y-6">
-                        <div class="w-12 h-12 rounded-xl theme-accent-light-bg flex items-center justify-center text-2xl">⚡</div>
-                        <h2 class="text-3xl sm:text-4xl font-black leading-tight">معالجة فورية وتدفق بيانات فائق السلاسة</h2>
-                        <p class="theme-text-secondary leading-relaxed">
-                            لا داعي لانتظار تحميل الملفات الكبيرة إلى السحابة. بفضل محرك الويب المطور خصيصاً للمنصة، تتم قراءة وتحليل مئات الآلاف من السجلات والصفوف في أجزاء من الثانية. أداء يضاهي التطبيقات المكتبية المثبتة مباشرة على حاسوبك.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 pt-4">
-                            <div class="p-4 rounded-2xl border theme-border theme-bg-secondary">
-                                <div class="text-2xl font-black theme-accent-color">0 ثانية</div>
-                                <div class="text-xs theme-text-secondary mt-1">زمن رفع الملفات (لأن الرفع غير موجود)</div>
+                    <div class="w-full lg:w-1/2">
+                        <!-- Dark Terminal Mockup -->
+                        <div class="pearl-glass-dark rounded-3xl p-6 shadow-2xl text-left font-mono text-sm text-gray-300 relative overflow-hidden">
+                            <div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-4">
+                                <div class="flex gap-1.5">
+                                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                </div>
+                                <span class="text-xs text-gray-500">Local Python Subsystem v1.0.2</span>
                             </div>
-                            <div class="p-4 rounded-2xl border theme-border theme-bg-secondary">
-                                <div class="text-2xl font-black theme-accent-color">100k+</div>
-                                <div class="text-xs theme-text-secondary mt-1">سجل تتم معالجته في أقل من ثانيتين</div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <p class="text-emerald-400">>>> import contract_analyzer as ca</p>
+                                <p class="text-emerald-400">>>> ca.load_local_file('contracts_2024.xlsx')</p>
+                                <p class="text-gray-400">[info] File loaded in browser memory: 4,520 records</p>
+                                <p class="text-emerald-400">>>> ca.analyze_privacy_compliance()</p>
+                                <p class="text-yellow-400">[process] Running local heuristic matching...</p>
+                                <p class="text-green-400">[success] Analysis complete. 0 data leaks detected. 100% Secure.</p>
+                                <div class="mt-4 pt-4 border-t border-gray-800 flex justify-between items-center">
+                                    <span class="text-gray-500">Execution time: 0.042s</span>
+                                    <span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded text-[10px]">LOCAL ENGINE ACTIVE</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -426,284 +429,297 @@
             </div>
         </section>
 
-        <!-- Section: Premium Asset Matrix (Market Grid / Tool Suite Matrix) -->
-        <section id="matrix" class="py-24 px-4 relative theme-bg-secondary border-t theme-border">
+        <!-- PREMIUM ASSET MATRIX (MARKET GRID) -->
+        <section id="tools-matrix" class="py-24 px-6 relative bg-slate-50/50">
             <div class="max-w-7xl mx-auto">
+                
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl sm:text-5xl font-black mb-6">حزمة الأدوات الوطنية المتكاملة</h2>
-                    <p class="text-lg theme-text-secondary leading-relaxed">
-                        استكشف المجموعة الكاملة من الأدوات والأنظمة الفرعية التي يتم بناؤها لتوفير حلول معالجة بيانات شاملة ومستقلة تماماً.
-                    </p>
+                    <span class="text-sm font-bold tracking-wider uppercase" style="color: var(--primary);">مصفوفة الأدوات الذكية</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold mt-2 mb-4">أدوات مخصصة لكل المهام</h2>
+                    <p class="text-gray-600">نعمل على بناء 10 أدوات متكاملة لتغطية كافة احتياجات معالجة المستندات والبيانات الوطنية. تتوفر الآن أداتان رئيسيتان، وتُضاف أداة جديدة كل يومين.</p>
                 </div>
 
-                <!-- 10-Tool Grid Matrix -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 10-Column/Card Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
                     <!-- Tool 1 (Active) -->
-                    <div class="p-6 rounded-2xl border-2 border-blue-500 theme-bg-secondary theme-shadow relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-black bg-blue-500 text-white">نشط الآن</div>
+                    <div class="pearl-glass rounded-3xl p-6 border hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                        <div class="absolute top-4 left-4 bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full font-bold">نشط حالياً</div>
                         <div>
-                            <div class="text-3xl mb-4">📑</div>
-                            <h3 class="font-bold text-lg mb-2">فرز الجداول والعقود</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">نظام فرز وعرض جداول البيانات والعقود السريع محلياً.</p>
+                            <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                                📊
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-800">فرز وتصفية جداول البيانات والعقود السريع</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-6">عارض تفاعلي ذكي وسريع جداً لفرز وتحليل العقود وجداول البيانات الكبيرة.</p>
+                            
+                            <!-- Sparkline Trend Vector (SVG Wave) -->
+                            <div class="w-full h-12 mb-6 opacity-80">
+                                <svg viewBox="0 0 100 30" class="w-full h-full text-blue-500" preserveAspectRatio="none">
+                                    <path d="M0,20 Q15,5 30,15 T60,10 T90,25 T100,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                </svg>
+                            </div>
                         </div>
-                        <button onclick="alert('جاري التشغيل...')" class="w-full mt-4 py-2 rounded-xl text-xs font-bold text-white theme-gradient">ابدأ الآن</button>
+                        <a href="https://app.contract.org.ly/" target="_blank" rel="noopener noreferrer" class="block w-full py-3 rounded-xl font-bold text-sm text-center text-white transition-all shadow-md hover:shadow-lg" style="background: var(--primary);">
+                            تشغيل الأداة الأولى 🚀
+                        </a>
                     </div>
 
                     <!-- Tool 2 (Active) -->
-                    <div class="p-6 rounded-2xl border-2 border-blue-500 theme-bg-secondary theme-shadow relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-black bg-blue-500 text-white">نشط الآن</div>
+                    <div class="pearl-glass rounded-3xl p-6 border hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                        <div class="absolute top-4 left-4 bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full font-bold">نشط حالياً</div>
                         <div>
-                            <div class="text-3xl mb-4">⚙️</div>
-                            <h3 class="font-bold text-lg mb-2">المحرك المتقدم</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">Local Analyzer Subsystem المدعوم ببايثون لسحق الملفات الضخمة.</p>
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                                🐍
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-800">المحرك البرمجي المتقدم (Local Analyzer)</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-6">محرك بايثون محلي لمعالجة السجلات المعقدة والملفات الضخمة وتوليد تقارير إحصائية فورية.</p>
+                            
+                            <!-- Sparkline Trend Vector (SVG Wave) -->
+                            <div class="w-full h-12 mb-6 opacity-80">
+                                <svg viewBox="0 0 100 30" class="w-full h-full text-emerald-500" preserveAspectRatio="none">
+                                    <path d="M0,10 Q20,25 40,5 T70,20 T100,10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                </svg>
+                            </div>
                         </div>
-                        <button onclick="alert('جاري التشغيل...')" class="w-full mt-4 py-2 rounded-xl text-xs font-bold text-white theme-gradient">ابدأ الآن</button>
+                        <a href="https://app1.contract.org.ly/" target="_blank" rel="noopener noreferrer" class="block w-full py-3 rounded-xl font-bold text-sm text-center text-white transition-all shadow-md hover:shadow-lg" style="background: var(--primary);">
+                            تشغيل المحرك المتقدم 🐍
+                        </a>
                     </div>
 
-                    <!-- Tool 3 (Upcoming) -->
-                    <div class="p-6 rounded-2xl border theme-border theme-bg-secondary opacity-60 relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold bg-yellow-500/10 text-yellow-600 border border-yellow-500/20">قريباً جداً</div>
+                    <!-- Tool 3 (Locked / Teaser) -->
+                    <div class="pearl-glass rounded-3xl p-6 border opacity-60 flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-4 left-4 bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full font-bold">قريباً جداً</div>
                         <div>
-                            <div class="text-3xl mb-4">📊</div>
-                            <h3 class="font-bold text-lg mb-2">محلل الرسوم البيانية</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">توليد تقارير بصرية ومخططات تفاعلية من البيانات الخام محلياً.</p>
+                            <div class="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center text-2xl mb-6 shadow-sm grayscale">
+                                📝
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-400">مستخرج النصوص الذكي (OCR Local)</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-6">استخراج النصوص والبيانات الحساسة من الصور والمستندات الورقية الممسوحة ضوئياً بالكامل محلياً.</p>
                         </div>
-                        <button disabled class="w-full mt-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-zinc-800 text-gray-400 cursor-not-allowed">قيد التطوير</button>
+                        <button disabled class="w-full py-3 rounded-xl font-bold text-sm text-center bg-gray-200 text-gray-400 cursor-not-allowed">
+                            قيد التطوير 🛠️
+                        </button>
                     </div>
 
-                    <!-- Tool 4 (Upcoming) -->
-                    <div class="p-6 rounded-2xl border theme-border theme-bg-secondary opacity-60 relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold bg-yellow-500/10 text-yellow-600 border border-yellow-500/20">قريباً جداً</div>
+                    <!-- Tool 4 (Locked / Teaser) -->
+                    <div class="pearl-glass rounded-3xl p-6 border opacity-60 flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-4 left-4 bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full font-bold">قريباً جداً</div>
                         <div>
-                            <div class="text-3xl mb-4">🔍</div>
-                            <h3 class="font-bold text-lg mb-2">المدقق الإملائي والنحوي</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">مراجعة وتدقيق المستندات والعقود الرسمية باللغة العربية محلياً.</p>
+                            <div class="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center text-2xl mb-6 shadow-sm grayscale">
+                                🔍
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-400">مقارن العقود الآلي الذكي</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-6">مقارنة نسختين من العقود والاتفاقيات وتحديد الفروقات والتعديلات بدقة متناهية.</p>
                         </div>
-                        <button disabled class="w-full mt-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-zinc-800 text-gray-400 cursor-not-allowed">قيد التطوير</button>
+                        <button disabled class="w-full py-3 rounded-xl font-bold text-sm text-center bg-gray-200 text-gray-400 cursor-not-allowed">
+                            قيد التطوير 🛠️
+                        </button>
                     </div>
 
-                    <!-- Tool 5 (Upcoming) -->
-                    <div class="p-6 rounded-2xl border theme-border theme-bg-secondary opacity-40 relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold bg-zinc-500/10 text-zinc-600 border border-zinc-500/20">قريباً</div>
+                    <!-- Tool 5 (Locked / Teaser) -->
+                    <div class="pearl-glass rounded-3xl p-6 border opacity-60 flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-4 left-4 bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full font-bold">قريباً جداً</div>
                         <div>
-                            <div class="text-3xl mb-4">📝</div>
-                            <h3 class="font-bold text-lg mb-2">منشئ العقود الذكي</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">صياغة العقود والاتفاقيات وفق القوالب الوطنية المعتمدة.</p>
+                            <div class="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center text-2xl mb-6 shadow-sm grayscale">
+                                📂
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-400">مدمج ومقسم ملفات PDF الضخمة</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-6">دمج وتقسيم مستندات PDF وتصغير حجمها وحمايتها بكلمات مرور قوية محلياً وبثوانٍ.</p>
                         </div>
-                        <button disabled class="w-full mt-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-zinc-800 text-gray-400 cursor-not-allowed">قيد التطوير</button>
+                        <button disabled class="w-full py-3 rounded-xl font-bold text-sm text-center bg-gray-200 text-gray-400 cursor-not-allowed">
+                            قيد التطوير 🛠️
+                        </button>
                     </div>
 
-                    <!-- Tool 6 (Upcoming) -->
-                    <div class="p-6 rounded-2xl border theme-border theme-bg-secondary opacity-40 relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold bg-zinc-500/10 text-zinc-600 border border-zinc-500/20">قريباً</div>
+                    <!-- Tool 6 (Locked / Teaser) -->
+                    <div class="pearl-glass rounded-3xl p-6 border opacity-60 flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-4 left-4 bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full font-bold">قريباً جداً</div>
                         <div>
-                            <div class="text-3xl mb-4">🔐</div>
-                            <h3 class="font-bold text-lg mb-2">مشفّر الملفات السيادي</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">تشفير الملفات الحساسة ببروتوكولات وطنية قبل مشاركتها.</p>
+                            <div class="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center text-2xl mb-6 shadow-sm grayscale">
+                                🔏
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-400">منشئ التوقيع الرقمي المشفر</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-6">توقيع المستندات الرسمية رقمياً وتوليد مفاتيح تشفير معتمدة محلياً لحماية هويتك الرقمية.</p>
                         </div>
-                        <button disabled class="w-full mt-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-zinc-800 text-gray-400 cursor-not-allowed">قيد التطوير</button>
+                        <button disabled class="w-full py-3 rounded-xl font-bold text-sm text-center bg-gray-200 text-gray-400 cursor-not-allowed">
+                            قيد التطوير 🛠️
+                        </button>
                     </div>
 
-                    <!-- Tool 7 (Upcoming) -->
-                    <div class="p-6 rounded-2xl border theme-border theme-bg-secondary opacity-40 relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold bg-zinc-500/10 text-zinc-600 border border-zinc-500/20">قريباً</div>
-                        <div>
-                            <div class="text-3xl mb-4">📁</div>
-                            <h3 class="font-bold text-lg mb-2">مدمج ومقسم الملفات</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">دمج وتجزئة الجداول والملفات الضخمة دون فقدان البيانات.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3D PRODUCT SHOWCASE DIVIDER -->
+        <section id="privacy-guarantee" class="relative py-28 px-6 bg-slate-900 text-white overflow-hidden">
+            <!-- Background Radial Glow -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#1e3a8a,transparent_60%)] opacity-40"></div>
+            
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+                    
+                    <div class="w-full lg:w-1/2 space-y-8">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-xs font-bold text-blue-400">
+                            🛡️ معيار الأمن القومي للبيانات
                         </div>
-                        <button disabled class="w-full mt-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-zinc-800 text-gray-400 cursor-not-allowed">قيد التطوير</button>
+                        <h2 class="text-3xl sm:text-5xl font-black leading-tight">
+                            السيادة الرقمية تبدأ من جهازك الشخصي
+                        </h2>
+                        <p class="text-gray-400 text-lg leading-relaxed">
+                            في عصر التحول الرقمي، تعد حماية البيانات الوطنية والسيادة على المعلومات ركيزة أساسية للأمن والاستقرار. من هنا، تم تصميم منصة <strong>Contract.org.ly</strong> لتكون الدرع الحامي لبياناتك ومستنداتك الحساسة.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                                <h4 class="font-bold text-emerald-400 mb-2">صفر خوادم خارجية ❌</h4>
+                                <p class="text-xs text-gray-400">لا يتم إرسال بياناتك لأي مكان خارج متصفحك الشخصي.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                                <h4 class="font-bold text-emerald-400 mb-2">تشفير عسكري محلي 🔐</h4>
+                                <p class="text-xs text-gray-400">تتم معالجة البيانات وتشفيرها داخل الذاكرة العشوائية لجهازك.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Tool 8 (Upcoming) -->
-                    <div class="p-6 rounded-2xl border theme-border theme-bg-secondary opacity-40 relative overflow-hidden flex flex-col justify-between h-64">
-                        <div class="absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold bg-zinc-500/10 text-zinc-600 border border-zinc-500/20">قريباً</div>
-                        <div>
-                            <div class="text-3xl mb-4">🔄</div>
-                            <h3 class="font-bold text-lg mb-2">محول التنسيقات المحلي</h3>
-                            <p class="theme-text-secondary text-xs leading-relaxed">تحويل مستنداتك وجداولك بين الصيغ المختلفة بخصوصية تامة.</p>
+                    <!-- 3D-like Iridescent Metallic Token / Shield Placeholder -->
+                    <div class="w-full lg:w-1/2 flex items-center justify-center relative">
+                        <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-blue-600 via-emerald-500 to-indigo-600 p-1.5 shadow-2xl animate-spin-slow">
+                            <div class="w-full h-full rounded-full bg-slate-950 flex flex-col items-center justify-center text-center p-8">
+                                <!-- Inner Shield Graphic -->
+                                <span class="text-7xl sm:text-8xl mb-4 animate-bounce">🛡️</span>
+                                <span class="text-sm font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">SECURE SHELL</span>
+                            </div>
                         </div>
-                        <button disabled class="w-full mt-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-zinc-800 text-gray-400 cursor-not-allowed">قيد التطوير</button>
+                        <!-- Decorative Ring -->
+                        <div class="absolute inset-0 border border-white/10 rounded-full scale-110 animate-pulse-subtle"></div>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- 3D Product Showcase Divider (The Secure Vault Visual) -->
-        <section class="py-20 px-4 relative overflow-hidden theme-gradient text-white text-center">
-            <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
-            <div class="max-w-4xl mx-auto relative z-10 space-y-6">
-                <div class="text-6xl select-none animate-bounce" style="animation-duration: 6s;">🛡️</div>
-                <h2 class="text-3xl sm:text-5xl font-black">بيئة المعالجة المعزولة (Local Sandbox)</h2>
-                <p class="text-lg opacity-90 max-w-2xl mx-auto leading-relaxed">
-                    تقنيتنا المبتكرة تنشئ حاوية برمجية مغلقة ومؤمنة بالكامل داخل متصفحك. بمجرد إغلاق علامة التبويب، يتم مسح كافة آثار البيانات نهائياً من ذاكرة جهازك العشوائية.
-                </p>
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-xs font-bold border border-white/20">
-                    🔒 تشفير محلي عسكري AES-256
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: Privacy Policy & Security Guarantee (ميثاق الخصوصية والأمان) -->
-        <section id="privacy" class="py-24 px-4 relative">
-            <div class="max-w-5xl mx-auto text-center">
-                <div class="w-16 h-16 rounded-2xl theme-accent-light-bg flex items-center justify-center text-3xl mx-auto mb-8">🛡️</div>
-                <h2 class="text-3xl sm:text-5xl font-black mb-8">ميثاق الأمان والخصوصية السيادية 100%</h2>
-                <p class="text-lg sm:text-xl theme-text-secondary leading-relaxed max-w-4xl mx-auto mb-12">
-                    نحن في <span class="font-black theme-accent-color">Contract.org.ly</span> نؤمن بأن البيانات الوطنية هي ثروة سيادية لا يجب أن تمر عبر أي خوادم خارجية أو شبكات عامة. لذلك، نضمن لك بشكل قاطع وصريح:
+        <!-- CONVERSIONAL CALL-TO-ACTION (CTA) -->
+        <section id="cta-section" class="py-24 px-6 relative">
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                
+                <h2 class="text-3xl sm:text-5xl font-black mb-6">كن شريكاً في بناء السيادة الرقمية</h2>
+                <p class="text-gray-600 text-lg leading-relaxed mb-12 max-w-2xl mx-auto">
+                    سجل بريدك الإلكتروني لتصلك تنبيهات الأدوات الجديدة فور إطلاقها، وكن أول من يستفيد من الحلول الأمنية المتقدمة لفرز وتحليل العقود محلياً.
                 </p>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-right">
-                    <div class="p-8 rounded-2xl border theme-border theme-bg-secondary theme-shadow">
-                        <div class="text-2xl mb-4">❌ ☁️</div>
-                        <h3 class="font-bold text-lg mb-2">لا رفع للسحابة</h3>
-                        <p class="theme-text-secondary text-sm leading-relaxed">ملفاتك ومستنداتك لا ترفع لأي خادم خارجي ولا تمر عبر شبكة الإنترنت نهائياً خلال عملية المعالجة.</p>
-                    </div>
-                    <div class="p-8 rounded-2xl border theme-border theme-bg-secondary theme-shadow">
-                        <div class="text-2xl mb-4">💻 🔒</div>
-                        <h3 class="font-bold text-lg mb-2">معالجة محلية بالكامل</h3>
-                        <p class="theme-text-secondary text-sm leading-relaxed">تتم كافة العمليات الحسابية والبرمجية داخل معالج جهازك وبواسطة متصفحك الشخصي فقط.</p>
-                    </div>
-                    <div class="p-8 rounded-2xl border theme-border theme-bg-secondary theme-shadow">
-                        <div class="text-2xl mb-4">🧹 💾</div>
-                        <h3 class="font-bold text-lg mb-2">تدمير فوري للبيانات</h3>
-                        <p class="theme-text-secondary text-sm leading-relaxed">بمجرد إغلاقك للمنصة، يتم تدمير كافة البيانات المؤقتة فورياً من ذاكرة جهازك العشوائية دون ترك أي أثر.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Conversional Call-To-Action (CTA) -->
-        <section class="py-24 px-4 theme-bg-secondary border-t theme-border">
-            <div class="max-w-4xl mx-auto text-center space-y-8">
-                <div class="text-5xl select-none animate-pulse">📧</div>
-                <h2 class="text-3xl sm:text-5xl font-black">كن أول من يعلم عند إطلاق الأدوات الجديدة</h2>
-                <p class="text-lg theme-text-secondary max-w-2xl mx-auto leading-relaxed">
-                    اشترك في نشرتنا البريدية لتلقي تنبيهات فورية عند إضافة أدوات تحليل جديدة للمنصة الوطنية. لا نرسل رسائل مزعجة أبداً.
-                </p>
-                <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-                    <input type="email" required placeholder="أدخل بريدك الإلكتروني الرسمي..." class="w-full px-5 py-4 rounded-2xl border theme-border bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-sm font-semibold" dir="rtl">
-                    <button type="submit" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-white theme-gradient theme-shadow hover:scale-[1.02] active:scale-95 transition-all text-center whitespace-nowrap">
-                        اشترك الآن
+                <!-- Signup Container -->
+                <form onsubmit="event.preventDefault(); alert('شكراً لتسجيلك! سنبقيك على اطلاع بأحدث الأدوات المضافة.')" class="pearl-glass p-2 rounded-2xl border shadow-xl max-w-xl mx-auto flex flex-col sm:flex-row items-center gap-2">
+                    <input type="email" required placeholder="أدخل بريدك الإلكتروني هنا..." class="w-full px-5 py-4 bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none text-right font-medium" aria-label="البريد الإلكتروني للتسجيل">
+                    <button type="submit" class="w-full sm:w-auto px-8 py-4 rounded-xl text-white font-bold transition-all shadow-md whitespace-nowrap" style="background: var(--primary);">
+                        اشترك الآن 🔔
                     </button>
                 </form>
-                <div id="subscribe-msg" class="text-sm font-bold text-green-500 hidden">🎉 تم الاشتراك بنجاح! سنبقيك على اطلاع دائم بآخر التحديثات المحلية.</div>
+
+                <p class="text-xs text-gray-400 mt-4">نحترم خصوصيتك تماماً. لن نقوم بمشاركة بريدك الإلكتروني مع أي طرف آخر.</p>
+
             </div>
         </section>
 
     </main>
 
-    <!-- Deep Corporate Footer (High contrast dark background) -->
-    <footer class="bg-zinc-950 text-zinc-300 py-16 px-4 border-t border-zinc-900">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-right">
+    <!-- DEEP CORPORATE FOOTER -->
+    <footer class="bg-slate-950 text-slate-300 py-16 px-6 relative border-t border-slate-900">
+        <div class="max-w-7xl mx-auto">
             
-            <!-- Brand & Description -->
-            <div class="space-y-4 md:col-span-2">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-white text-zinc-950 flex items-center justify-center font-black text-xl shadow-lg">
-                        C
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                
+                <!-- Column 1: Brand details -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white bg-blue-600">
+                            🇱🇾
+                        </div>
+                        <span class="text-lg font-bold text-white">Contract<span class="text-gray-500 font-light">.org.ly</span></span>
                     </div>
-                    <span class="font-black text-lg tracking-wider text-white">Contract<span class="text-blue-500">.org.ly</span></span>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        المنصة الوطنية المتكاملة لمعالجة البيانات محلياً وبخصوصية 100%. نهتم بالسيادة الرقمية ونبني جسور الأمان للمؤسسات والأفراد داخل ليبيا وخارجها.
+                    </p>
                 </div>
-                <p class="text-zinc-400 text-sm leading-relaxed max-w-sm">
-                    المنصة الوطنية المتكاملة لمعالجة البيانات محلياً وبخصوصية 100%. حلول سيادية متطورة لضمان أمن المعلومات وحماية الخصوصية الرقمية في ليبيا.
-                </p>
+
+                <!-- Column 2: Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-white tracking-widest uppercase">روابط سريعة</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#three-rectangles" class="hover:text-blue-400 transition-colors">مزايا المنصة</a></li>
+                        <li><a href="#tools-matrix" class="hover:text-blue-400 transition-colors">مصفوفة الأدوات الذكية</a></li>
+                        <li><a href="#privacy-guarantee" class="hover:text-blue-400 transition-colors">السيادة الرقمية</a></li>
+                        <li><a href="#cta-section" class="hover:text-blue-400 transition-colors">انضم للقائمة البريدية</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact Info -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-white tracking-widest uppercase">بيانات الاتصال</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li class="flex items-center gap-2">
+                            <span>📧</span>
+                            <a href="mailto:support@contract.org.ly" class="hover:text-blue-400 transition-colors">support@contract.org.ly</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span>📍</span>
+                            <span>طرابلس، ليبيا</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span>🛡️</span>
+                            <span>إدارة الأمن الرقمي والسيادة السيبرانية</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter / Quick Note -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-white tracking-widest uppercase">ملاحظة أمنية</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        كافة الأدوات المتاحة على هذا النطاق تعمل بالكامل على معالج جهازك الشخصي. لا يتم حفظ أي سجلات نشاط للمستخدمين حماية لخصوصيتك المطلقة.
+                    </p>
+                </div>
+
             </div>
 
-            <!-- Quick Links -->
-            <div class="space-y-4">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider">روابط سريعة</h4>
-                <ul class="space-y-2 text-sm text-zinc-400">
-                    <li><a href="#about" class="hover:text-white transition-colors">عن المنصة</a></li>
-                    <li><a href="#three-rectangles" class="hover:text-white transition-colors">الأدوات الحالية</a></li>
-                    <li><a href="#privacy" class="hover:text-white transition-colors">ميثاق الخصوصية</a></li>
-                    <li><a href="#matrix" class="hover:text-white transition-colors">حزمة الأدوات</a></li>
-                </ul>
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>© 2024 Contract.org.ly. جميع الحقوق محفوظة للمنصة الوطنية لمعالجة البيانات.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:underline">سياسة الخصوصية</a>
+                    <a href="#" class="hover:underline">شروط الاستخدام</a>
+                    <a href="#" class="hover:underline">اتفاقية مستوى الخدمة</a>
+                </div>
             </div>
 
-            <!-- Contact Information -->
-            <div class="space-y-4">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider">الاتصال والدعم</h4>
-                <ul class="space-y-2 text-sm text-zinc-400">
-                    <li class="flex items-center gap-2">
-                        <span>📧</span>
-                        <a href="mailto:support@contract.org.ly" class="hover:text-white transition-colors" aria-label="أرسل بريد إلكتروني للدعم">support@contract.org.ly</a>
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <span>📍</span>
-                        <span>طرابلس، ليبيا</span>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-zinc-900 text-center text-xs text-zinc-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© 2026 Contract.org.ly. جميع الحقوق محفوظة للمنصة الوطنية لمعالجة البيانات.</p>
-            <div class="flex gap-4">
-                <a href="#" class="hover:text-zinc-300 transition-colors" aria-label="سياسة الخصوصية">سياسة الخصوصية</a>
-                <a href="#" class="hover:text-zinc-300 transition-colors" aria-label="شروط الاستخدام">شروط الاستخدام</a>
-            </div>
         </div>
     </footer>
 
-    <!-- JS Logic for Themes, Interactive Sandbox, and Forms -->
+    <!-- Theme Switcher Script -->
     <script>
-        // Dynamic Theme Switcher Engine
-        function setTheme(themeName) {
-            const htmlElement = document.documentElement;
-            if (themeName === 'blue') {
-                htmlElement.removeAttribute('data-theme');
-            } else {
-                htmlElement.setAttribute('data-theme', themeName);
+        function switchTheme(theme) {
+            // Remove all theme classes from body
+            document.body.classList.remove('theme-luxury', 'theme-gold', 'theme-olive');
+            
+            // Add selected theme class
+            if (theme === 'luxury') {
+                document.body.classList.add('theme-luxury');
+            } else if (theme === 'gold') {
+                document.body.classList.add('theme-gold');
+            } else if (theme === 'olive') {
+                document.body.classList.add('theme-olive');
             }
-            // Save theme to localStorage
-            localStorage.setItem('contract-theme', themeName);
+            
+            // Save preference to localStorage
+            localStorage.setItem('preferred-theme', theme);
         }
 
-        // Restore saved theme on load
+        // Load saved theme on startup
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('contract-theme');
+            const savedTheme = localStorage.getItem('preferred-theme');
             if (savedTheme) {
-                setTheme(savedTheme);
+                switchTheme(savedTheme);
             }
         });
-
-        // Client-Side Sandbox Demo Logic (Instant Local Stats)
-        function analyzeLocally() {
-            const startTime = performance.now();
-            const textarea = document.getElementById('demo-input');
-            const text = textarea.value;
-
-            // Calculate character count
-            const charCount = text.length;
-
-            // Calculate word count
-            const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-
-            // Calculate simulated local processing delay
-            const endTime = performance.now();
-            const duration = (endTime - startTime).toFixed(2);
-
-            // Update UI elements
-            document.getElementById('char-count').innerText = charCount;
-            document.getElementById('word-count').innerText = wordCount;
-            document.getElementById('process-speed').innerText = `${duration}ms`;
-        }
-
-        // Handle CTA subscription
-        function handleSubscribe(event) {
-            event.preventDefault();
-            const form = event.target;
-            const msg = document.getElementById('subscribe-msg');
-            msg.classList.remove('hidden');
-            form.reset();
-            setTimeout(() => {
-                msg.classList.add('hidden');
-            }, 5000);
-        }
     </script>
 </body>
 </html>
